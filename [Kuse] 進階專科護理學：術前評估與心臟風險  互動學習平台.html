@@ -1,0 +1,523 @@
+<!DOCTYPE html><html lang="zh-Hant"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>進階專科護理學：術前評估與心臟風險 | 互動學習平台</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;family=Noto+Serif+TC:wght@600;700&amp;display=swap" rel="stylesheet">
+    <!-- Iconify -->
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+    <!-- MathJax -->
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [[`$`, `$`], [`\\(`, `\\)`]],
+          displayMath: [[`$$`, `$$`], [`\\[`, `\\]`]]
+        },
+        svg: { fontCache: `global` }
+      };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async=""></script>
+    <style>
+        /* Theme: Warm (來自 theme-warm.css) */
+        :root {
+          --background: rgb(250, 249, 245);
+          --foreground: rgb(61, 57, 41);
+          --card: rgb(250, 249, 245);
+          --card-foreground: rgb(20, 20, 19);
+          --popover: rgb(255, 255, 255);
+          --popover-foreground: rgb(40, 38, 27);
+          --primary: rgb(201, 100, 66);
+          --primary-foreground: rgb(255, 255, 255);
+          --secondary: rgb(233, 230, 220);
+          --secondary-foreground: rgb(83, 81, 70);
+          --muted: rgb(237, 233, 222);
+          --muted-foreground: rgb(131, 130, 125);
+          --accent: rgb(233, 230, 220);
+          --accent-foreground: rgb(40, 38, 27);
+          --destructive: rgb(20, 20, 19);
+          --destructive-foreground: rgb(255, 255, 255);
+          --border: rgb(218, 217, 212);
+          --input: rgb(180, 178, 167);
+          --ring: rgb(201, 100, 66);
+          --font-sans: 'Noto Sans TC', ui-sans-serif, system-ui, sans-serif;
+          --font-serif: 'Noto Serif TC', ui-serif, Georgia, serif;
+          --radius: 0.75rem;
+          --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+          --spacing: 0.25rem;
+        }
+
+        /* Base Styles (來自 base.css) */
+        body {
+          font-family: var(--font-sans);
+          background: var(--background);
+          color: var(--foreground);
+          margin: 0;
+          padding: 0;
+          line-height: 1.7;
+          scroll-behavior: smooth;
+        }
+
+        .container {
+          max-width: 1000px;
+          margin: 0 auto;
+          padding: 0 24px;
+        }
+
+        /* Navigation */
+        .nav-container {
+          position: fixed;
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 1000;
+          display: flex;
+          gap: 4px;
+          background: rgba(250, 249, 245, 0.8);
+          backdrop-filter: blur(10px);
+          padding: 6px;
+          border-radius: 50px;
+          box-shadow: var(--shadow-lg);
+          border: 1px solid var(--border);
+          max-width: 95vw;
+          overflow-x: auto;
+        }
+
+        .nav-item {
+          padding: 8px 14px;
+          border-radius: 20px;
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          color: var(--muted-foreground);
+          font-weight: 500;
+          font-size: 0.85rem;
+          white-space: nowrap;
+          transition: 0.3s;
+        }
+
+        .nav-item:hover { color: var(--primary); }
+        .nav-item.active { background: var(--primary); color: white; }
+
+        @media (max-width: 768px) {
+          .nav-container { top: auto; bottom: 20px; }
+        }
+
+        /* Progress Bar */
+        #progressBarContainer {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          z-index: 1001;
+        }
+        #progressBar { height: 100%; width: 0%; background: var(--primary); transition: 0.1s; }
+
+        /* Sections */
+        section { padding: 100px 0 60px; border-bottom: 1px solid var(--border); }
+        h1, h2, h3 { font-family: var(--font-serif); color: var(--foreground); }
+        .hero-title { font-size: 3rem; margin-bottom: 1rem; text-align: center; }
+
+        /* Cards */
+        .card {
+          background: white;
+          border: 1px solid var(--border);
+          border-radius: var(--radius);
+          padding: 32px;
+          margin-bottom: 24px;
+          box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+
+        /* TOC Grid */
+        .toc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 40px; }
+        .toc-card {
+          background: var(--accent);
+          padding: 24px;
+          border-radius: var(--radius);
+          cursor: pointer;
+          transition: 0.3s;
+          text-align: center;
+        }
+        .toc-card:hover { transform: translateY(-5px); background: var(--primary); color: white; }
+
+        /* Flashcards */
+        .flashcard-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .flashcard { perspective: 1000px; height: 200px; cursor: pointer; }
+        .flashcard-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          transition: transform 0.6s;
+          transform-style: preserve-3d;
+        }
+        .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
+        .flashcard-front, .flashcard-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          backface-visibility: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 20px;
+          border-radius: var(--radius);
+          border: 1px solid var(--border);
+          font-weight: 500;
+        }
+        .flashcard-front { background: white; color: var(--foreground); }
+        .flashcard-back { background: var(--primary); color: white; transform: rotateY(180deg); }
+
+        /* Quiz */
+        .quiz-item { margin-bottom: 30px; padding: 20px; border-radius: var(--radius); background: var(--secondary); }
+        .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .option-label {
+          background: white;
+          padding: 12px 16px;
+          border-radius: 8px;
+          border: 1px solid var(--border);
+          cursor: pointer;
+          transition: 0.2s;
+        }
+        .option-label:hover { border-color: var(--primary); }
+        input[type="radio"]:checked + span { color: var(--primary); font-weight: bold; }
+        .feedback { margin-top: 15px; padding: 15px; border-radius: 8px; display: none; }
+        .feedback.correct { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .feedback.wrong { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+        /* Formula & Badge */
+        .formula-block { background: var(--muted); padding: 20px; border-radius: var(--radius); margin: 20px 0; text-align: center; }
+        .badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; background: var(--primary); color: white; margin-bottom: 8px; }
+
+        /* Branding */
+        .kuse-branding {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+          margin: 40px 0;
+          color: var(--muted-foreground);
+          text-decoration: none;
+          transition: 0.3s;
+          font-size: 0.9rem;
+        }
+        .kuse-branding:hover { color: var(--primary); }
+        .kuse-branding svg { height: 1.2em; }
+    </style>
+</head>
+<body>
+    <div id="progressBarContainer"><div id="progressBar"></div></div>
+
+    <nav class="nav-container">
+        <button class="nav-item active" onclick="scrollToSection(`hero`)">首頁</button>
+        <button class="nav-item" onclick="scrollToSection(`toc`)">目錄</button>
+        <button class="nav-item" onclick="scrollToSection(`concept`)">風險評估</button>
+        <button class="nav-item" onclick="scrollToSection(`assessment`)">功能評估</button>
+        <button class="nav-item" onclick="scrollToSection(`cad`)">冠心病</button>
+        <button class="nav-item" onclick="scrollToSection(`vhd`)">瓣膜病</button>
+        <button class="nav-item" onclick="scrollToSection(`quiz`)">測驗</button>
+        <button class="nav-item" onclick="scrollToSection(`flashcards`)">閃卡</button>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section id="hero" style="text-align: center; min-height: 80vh; display: flex; flex-direction: column; justify-content: center;">
+            <iconify-icon icon="solar:heart-pulse-bold-duotone" style="font-size: 80px; color: var(--primary); margin-bottom: 20px;"></iconify-icon>
+            <h1 class="hero-title">進階專科護理學課程 2026</h1>
+            <p style="font-size: 1.2rem; color: var(--muted-foreground); max-width: 700px; margin: 0 auto 30px;">
+                術前評價與心臟風險評估：從基礎 ASA 分級到複雜瓣膜疾病的護理決策
+            </p>
+            <div>
+                <button class="button" onclick="scrollToSection(`toc`)" style="padding: 12px 32px; font-size: 1rem; background: var(--primary); color: white; border: none; border-radius: 50px; cursor: pointer;">開始學習</button>
+            </div>
+        </section>
+
+        <!-- TOC Section -->
+        <section id="toc">
+            <h2 style="text-align: center;"><iconify-icon icon="solar:list-bold" style="vertical-align: middle; margin-right: 10px;"></iconify-icon>學習模塊目錄</h2>
+            <div class="toc-grid">
+                <div class="toc-card" onclick="scrollToSection(`concept`)">
+                    <iconify-icon icon="solar:danger-bold" style="font-size: 32px; margin-bottom: 12px;"></iconify-icon>
+                    <h3>ASA &amp; RCRI 分級</h3>
+                </div>
+                <div class="toc-card" onclick="scrollToSection(`assessment`)">
+                    <iconify-icon icon="solar:running-bold" style="font-size: 32px; margin-bottom: 12px;"></iconify-icon>
+                    <h3>METs 功能評估</h3>
+                </div>
+                <div class="toc-card" onclick="scrollToSection(`cad`)">
+                    <iconify-icon icon="solar:graph-up-bold" style="font-size: 32px; margin-bottom: 12px;"></iconify-icon>
+                    <h3>CAD 與血運重建</h3>
+                </div>
+                <div class="toc-card" onclick="scrollToSection(`vhd`)">
+                    <iconify-icon icon="solar:medical-mask-bold" style="font-size: 32px; margin-bottom: 12px;"></iconify-icon>
+                    <h3>瓣膜性心臟病</h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Concept Section: ASA/Risk -->
+        <section id="concept">
+            <div class="badge">基礎概念</div>
+            <h2>ASA 分級與 RCRI 風險評估</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3><iconify-icon icon="solar:user-speak-bold" style="margin-right: 8px;"></iconify-icon>ASA 物理狀態分級</h3>
+                    <ul style="padding-left: 20px;">
+                        <li><strong>ASA I:</strong> 健康患者，無全身性疾病。</li>
+                        <li><strong>ASA II:</strong> 輕微全身性疾病（如：受控的糖尿病、高血壓）。</li>
+                        <li><strong>ASA III:</strong> 嚴重的全身性疾病，但非致死性。</li>
+                        <li><strong>ASA IV:</strong> 嚴重的全身性疾病，威脅生命。</li>
+                        <li><strong>ASA V:</strong> 瀕死患者，不手術難以存活。</li>
+                        <li><strong>ASA VI:</strong> 腦死，準備捐贈器官。</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3><iconify-icon icon="solar:shield-check-bold" style="margin-right: 8px;"></iconify-icon>RCRI 修改版心臟風險指數</h3>
+                    <p>評估術後主要不良心臟事件 (MACE) 的六大預測因子：</p>
+                    <ol style="padding-left: 20px;">
+                        <li>高風險手術（腹腔、胸腔、骨科）</li>
+                        <li>缺血性心臟病史</li>
+                        <li>充血性心臟衰竭病史</li>
+                        <li>腦血管疾病史</li>
+                        <li>術前需胰島素治療之糖尿病</li>
+                        <li>術前肌酸酐 &gt; 177 μmol/L (2 mg/dL)</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessment Section: METs -->
+        <section id="assessment">
+            <div class="badge">臨床評估</div>
+            <h2>代謝當量 (METs) 功能評估</h2>
+            <div class="card">
+                <div class="grid-2">
+                    <div>
+                        <h3>功能儲備 (Functional Capacity)</h3>
+                        <p>術前評估最重要的指標之一。若患者無法達到 <strong>4 METs</strong>，術後併發症風險顯著增加。</p>
+                        <div class="formula-block">
+                            $1 \text{ MET} = 3.5 \text{ ml O}_2/\text{kg/min}$ (靜息代謝率)
+                        </div>
+                    </div>
+                    <div style="background: var(--accent); padding: 20px; border-radius: var(--radius);">
+                        <ul style="list-style: none; padding: 0;">
+                            <li><iconify-icon icon="solar:walking-bold"></iconify-icon> <strong>&lt; 4 METs:</strong> 生活自理、緩慢散步。</li>
+                            <li><iconify-icon icon="solar:stairs-bold"></iconify-icon> <strong>4-10 METs:</strong> 爬兩層樓梯、快走、割草。</li>
+                            <li><iconify-icon icon="solar:swimming-bold"></iconify-icon> <strong>&gt; 10 METs:</strong> 劇烈運動（游泳、網球）。</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>12 導程心電圖 (12-Lead ECG) 指引</h3>
+                <p>對於具有 <strong>RCRI ≥ 1</strong> 或已知心臟病史且進行中/高風險手術的患者，應在術前進行心電圖檢查。</p>
+            </div>
+        </section>
+
+        <!-- CAD Section -->
+        <section id="cad">
+            <div class="badge">病理分析</div>
+            <h2>冠狀動脈疾病 (CAD) 與血運重建</h2>
+            <div class="card">
+                <h3>手術指引與再灌注</h3>
+                <p>何時需要在非心臟手術前進行 PCI（心導管併支架放置）？</p>
+                <div class="grid-2" style="margin-top: 20px;">
+                    <div style="border-left: 4px solid var(--primary); padding-left: 15px;">
+                        <h4>穩定型 CAD</h4>
+                        <p>常規預防性血運重建通常<strong>不推薦</strong>。研究顯示它並不能改善術後長期預後，除非符合 CABG 指徵。</p>
+                    </div>
+                    <div style="border-left: 4px solid var(--primary); padding-left: 15px;">
+                        <h4>抗血小板藥物管理</h4>
+                        <p>BMS 支架需等待 1 個月；DES 支架通常建議等待 6 個月，若需提前手術，最少須 3 個月。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>超聲心動圖 (Echocardiography)</h3>
+                <p>主要評估 <strong>LVEF</strong>（左心室射血分數）。LVEF &lt; 35% 為術後心臟衰竭的高風險預測指標。</p>
+            </div>
+        </section>
+
+        <!-- VHD Section -->
+        <section id="vhd">
+            <div class="badge">病理分析</div>
+            <h2>瓣膜性心臟病 (VHD)</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>主動脈瓣狹窄 (AS)</h3>
+                    <p>最危險的瓣膜疾病之一。嚴重 AS 定義：</p>
+                    <div class="formula-block">
+                        瓣膜面積 $V_A &lt; 1.0 \text{ cm}^2$ <br>
+                        平均壓力梯度 $&gt; 40 \text{ mmHg}$
+                    </div>
+                    <p>若有症狀且為嚴重 AS，非緊急手術應推遲，先進行瓣膜置換。</p>
+                </div>
+                <div class="card">
+                    <h3>二尖瓣返流 (MR)</h3>
+                    <p>慢性 MR 患者通常耐受性較好，除非出現肺水腫或嚴重心律不整。需注意左心室收縮功能衰退。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz">
+            <h2 style="text-align: center;"><iconify-icon icon="solar:clipboard-list-bold" style="margin-right: 10px;"></iconify-icon>知識鞏固測驗</h2>
+            <div id="quizContainer">
+                <!-- Quiz questions will be generated by JS -->
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="button" onclick="submitQuiz()">提交測驗並查看分數</button>
+                <div id="quizResult" style="margin-top: 20px; font-size: 1.5rem; font-weight: bold; color: var(--primary);"></div>
+            </div>
+        </section>
+
+        <!-- Flashcards Section -->
+        <section id="flashcards">
+            <h2 style="text-align: center;"><iconify-icon icon="solar:album-bold" style="margin-right: 10px;"></iconify-icon>關鍵詞匯閃卡 (20+)</h2>
+            <div class="flashcard-container" id="flashcardContainer">
+                <!-- Flashcards will be generated by JS -->
+            </div>
+        </section>
+
+        <!-- Branding -->
+        <a href="https://kuse.ai" class="kuse-branding">
+            <span>made with</span>
+            <svg viewBox="0,0,160,44" xmlns="http://www.w3.org/2000/svg"><path d="m.01,20.65C-.43,8.25,9.3-2.03,22.04.34,34.78,2.72,43.29,8.32,43.29,22.9s-8.66,19.01-22.03,20.3C7.9,44.5.46,33.05.01,20.65z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="m146.76,7.94c8.07,0,13.24,6.15,13.24,14.58v1.39h-20.75c.45,4.05,3.51,7.37,8.57,7.37,2.62,0,5.73-1.05,7.62-2.94l2.67,3.83c-2.67,2.55-6.62,3.88-10.9,3.88-8.07,0-14.08-5.6-14.08-14.08,0-7.76,5.67-14.02,13.63-14.02zm0,4.77c-5.01,0-7.29,3.83-7.57,7.1h15.13c-.11-3.16-2.28-7.1-7.57-7.1z" fill="currentColor"></path><path d="m86.64,24.49c0,4.15,2.39,6.84,6.84,6.84,4.4,0,6.84-2.69,6.84-6.84V8.55h5.37v16.33c0,6.7-4.06,11.14-12.21,11.14-8.21,0-12.21-4.5-12.21-11.09V8.55h5.37v15.94zm32.99-16.55c4.49,0,8.06,1.47,10.6,3.86l-2.59,3.81c-2.05-2-5.28-3.08-8.06-3.08-2.88,0-4.84,1.37-4.84,3.32,0,1.91,2.64,2.54,5.81,3.27,4.59,1.08,10.26,2.4,10.26,8.46,0,4.94-3.76,8.41-11.14,8.41-4.98,0-8.94-1.76-11.24-4.11l2.54-4.11c1.86,1.91,5.18,3.67,8.84,3.67,3.91,0,5.57-1.66,5.57-3.62,0-2.3-2.88-2.98-6.21-3.76-4.54-1.08-9.87-2.3-9.87-8.06,0-4.5,4.2-8.06,10.31-8.06zM60.79,20.82,71.44,8.55h6.5L66.46,21.26,78.82,35.44h-6.5l-9.28-11.1-2.25,2.49v8.6h-5.33V8.55h5.33v12.27z" fill="currentColor"></path></svg>
+        </a>
+    </div>
+
+    <script>
+        // Smooth Scroll Function
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                const navHeight = 80;
+                const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: elementPosition - navHeight,
+                    behavior: `smooth`
+                });
+            }
+        }
+
+        // Scroll Logic
+        window.addEventListener(`scroll`, () => {
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const progress = (scrollTop / scrollHeight) * 100;
+            document.getElementById(`progressBar`).style.width = progress + `%`;
+
+            const sections = document.querySelectorAll(`section`);
+            const navItems = document.querySelectorAll(`.nav-item`);
+            
+            sections.forEach((section, index) => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 200 && rect.bottom >= 200) {
+                    navItems.forEach(item => item.classList.remove(`active`));
+                    if (navItems[index]) navItems[index].classList.add(`active`);
+                }
+            });
+        });
+
+        // Quiz Data
+        const quizData = [
+            { q: `一名 65 歲糖尿病患擬行全髖關節置換術，其糖尿病受控且無其他併發症，其 ASA 分級最可能是？`, options: [`ASA I`, `ASA II`, `ASA III`, `ASA IV`], correct: 1, explanation: `ASA II 適用於有輕微全身性疾病且受控良好的患者，如穩定型糖尿病或高血壓。` },
+            { q: `根據 RCRI，下列哪項不是心臟風險預測因子？`, options: [`吸煙史`, `腦血管疾病史`, `慢性腎功能不全`, `高風險手術`], correct: 0, explanation: `RCRI 的六大因子包括高風險手術、缺血性心臟病、心衰竭、腦血管病、糖尿病及腎功能不全。吸煙史不直接計入 RCRI 指數。` },
+            { q: `患者自述能輕鬆爬兩層樓梯而不喘，這代表其 METs 至少為？`, options: [`1 MET`, `2 METs`, `4 METs`, `10 METs`], correct: 2, explanation: `爬兩層樓梯通常被視為評估 4 METs 功能儲備的臨床標準。` },
+            { q: `嚴重主動脈瓣狹窄 (AS) 的瓣膜面積定義為？`, options: [`< 2.0 cm²`, `< 1.5 cm²`, `< 1.0 cm²`, `< 0.5 cm²`], correct: 2, explanation: `嚴重的 AS 定義為瓣膜面積小於 1.0 cm²。` },
+            { q: `術前 LVEF 低於多少被認為是術後心衰的高風險？`, options: [`55%`, `45%`, `35%`, `25%`], correct: 2, explanation: `左心室射血分數 (LVEF) < 35% 是心臟功能受損的重要預測指標。` },
+            { q: `若患者放置 DES 支架，非緊急手術建議至少等待多久？`, options: [`2 星期`, [`1 個月`], `6 個月`, `2 年`], correct: 2, explanation: `目前的指引通常建議 DES 支架放置後等待 6 個月，以降低支架內血栓風險。` },
+            { q: `術前 12 導程心電圖檢查推薦用於？`, options: [`所有接受白內障手術者`, `RCRI 為 0 的年輕患者`, `具有已知心臟病史且行中/高風險手術者`, `僅用於 80 歲以上患者`], correct: 2, explanation: `心電圖主要推薦用於有心臟病史或 RCRI ≥ 1 的中高風險手術患者。` },
+            { q: `MET 值的生理定義是每公斤體重每分鐘消耗多少氧氣？`, options: [`1.5 ml`, `3.5 ml`, `5.5 ml`, `10 ml`], correct: 1, explanation: `1 MET 定義為靜息狀態下的代謝，約為 3.5 ml O₂/kg/min。` },
+            { q: `ASA IV 級代表？`, options: [`健康`, `輕微疾病`, `致死性疾病`, `威脅生命的嚴重全身性疾病`], correct: 3, explanation: `ASA IV 級定義為對生命構成持續威脅的嚴重全身性疾病。` },
+            { q: `下列哪項手術屬於 RCRI 中的「高風險手術」？`, options: [`腹腔鏡膽囊切除術`, `腹主動脈瘤修補術`, `白內障手術`, `疝氣修補術`], correct: 1, explanation: `RCRI 中的高風險手術包括腹腔、胸腔及腹膜後血管手術等。` },
+            { q: `下列關於穩定型 CAD 術前血運重建的敘述，何者正確？`, options: [`所有 CAD 患者術前都應先做 PCI`, `常規預防性 PCI 不能改善術後長期預後`, `PCI 後應立即停用所有抗血小板藥物`, `BMS 比 DES 更容易導致出血`], correct: 1, explanation: `多項隨機研究顯示，對穩定型 CAD 患者進行常規預防性血運重建，並不優於單純藥物管理。` },
+            { q: `瓣膜性心臟病中，哪一種在圍手術期最容易導致猝死？`, options: [`二尖瓣脫垂`, `輕度肺動脈瓣關閉不全`, `嚴重症狀性主動脈瓣狹窄`, `輕度三尖瓣返流`], correct: 2, explanation: `嚴重且有症狀的主動脈瓣狹窄患者，在麻醉誘導及術中血流動力學波動時風險最高。` },
+            { q: `RCRI 中對「肌酸酐」的切點數值為？`, options: [`> 1.0 mg/dL`, `> 1.5 mg/dL`, `> 2.0 mg/dL`, `> 3.0 mg/dL`], correct: 2, explanation: `RCRI 指數中慢性腎病的定義為術前肌酸酐 > 2.0 mg/dL (177 μmol/L)。` },
+            { q: `對於無法進行體力活動評估的患者，建議？`, options: [`直接手術，不需評估`, `進行藥物負荷超聲心動圖或核醫學檢查`, `僅依靠年齡判斷`, `取消手術`], correct: 1, explanation: `若患者功能儲備不明且具有風險因子，建議進行非侵入性負荷試驗。` },
+            { q: `二尖瓣狹窄患者的主要病理生理擔憂是？`, options: [`左心室肥厚`, `左心房高壓及肺充血`, `主動脈瓣膜鈣化`, `升主動脈瘤`], correct: 1, explanation: `二尖瓣狹窄導致左心房壓力升高，進而引起肺靜脈高壓及可能的房顫。` }
+        ];
+
+        // Render Quiz
+        const quizContainer = document.getElementById(`quizContainer`);
+        quizData.forEach((item, idx) => {
+            const div = document.createElement(`div`);
+            div.className = `quiz-item`;
+            div.innerHTML = `
+                <p><strong>Q${idx+1}:</strong> ${item.q}</p>
+                <div class="quiz-options">
+                    ${item.options.map((opt, oIdx) => `
+                        <label class="option-label">
+                            <input type="radio" name="q${idx}" value="${oIdx}"> <span>${opt}</span>
+                        </label>
+                    `).join(``)}
+                </div>
+                <div id="feedback${idx}" class="feedback"></div>
+            `;
+            quizContainer.appendChild(div);
+        });
+
+        function submitQuiz() {
+            let score = 0;
+            quizData.forEach((item, idx) => {
+                const selected = document.querySelector(`input[name="q${idx}"]:checked`);
+                const feedback = document.getElementById(`feedback${idx}`);
+                feedback.style.display = `block`;
+                if (selected && parseInt(selected.value) === item.correct) {
+                    score++;
+                    feedback.className = `feedback correct`;
+                    feedback.innerHTML = `<iconify-icon icon="solar:check-circle-bold"></iconify-icon> 正確！${item.explanation}`;
+                } else {
+                    feedback.className = `feedback wrong`;
+                    feedback.innerHTML = `<iconify-icon icon="solar:close-circle-bold"></iconify-icon> 錯誤。正確答案是: ${item.options[item.correct]}。<br>${item.explanation}`;
+                }
+            });
+            document.getElementById(`quizResult`).innerText = `你的得分: ${score} / ${quizData.length}`;
+            scrollToSection(`quizResult`);
+        }
+
+        // Flashcards Data
+        const flashcardsData = [
+            { f: `ASA`, b: `American Society of Anesthesiologists 物理狀態分級` },
+            { f: `RCRI`, b: `Revised Cardiac Risk Index 修改版心臟風險指數` },
+            { f: `MET`, b: `Metabolic Equivalent 代謝當量` },
+            { f: `CAD`, b: `Coronary Artery Disease 冠狀動脈疾病` },
+            { f: `VHD`, b: `Valvular Heart Disease 瓣膜性心臟病` },
+            { f: `AS`, b: `Aortic Stenosis 主動脈瓣狹窄` },
+            { f: `MR`, b: `Mitral Regurgitation 二尖瓣返流` },
+            { f: `PCI`, b: `Percutaneous Coronary Intervention 經皮冠狀動脈介入治療` },
+            { f: `DES`, b: `Drug-Eluting Stent 藥物洗脫支架` },
+            { f: `BMS`, b: `Bare-Metal Stent 金屬裸支架` },
+            { f: `LVEF`, b: `Left Ventricular Ejection Fraction 左心室射血分數` },
+            { f: `MACE`, b: `Major Adverse Cardiac Events 主要心臟不良事件` },
+            { f: `CABG`, b: `Coronary Artery Bypass Grafting 冠狀動脈旁路移植術` },
+            { f: `NSQIP`, b: `National Surgical Quality Improvement Program 手術質量改進計劃` },
+            { f: `NYHA`, b: `New York Heart Association 心功能分級` },
+            { f: `4 METs`, b: `爬兩層樓梯的功能儲備臨界值` },
+            { f: `Creatinine > 177`, b: `RCRI 中代表腎功能的風險因子 (2.0 mg/dL)` },
+            { f: `Preop ECG`, b: `RCRI ≥ 1 且中高風險手術時的推薦檢查` },
+            { f: `DAPT`, b: `Dual Antiplatelet Therapy 雙重抗血小板治療` },
+            { f: `TAVI/TAVR`, b: `經導管主動脈瓣置換術` },
+            { f: `LVH`, b: `Left Ventricular Hypertrophy 左心室肥厚` }
+        ];
+
+        const flashcardContainer = document.getElementById(`flashcardContainer`);
+        flashcardsData.forEach(card => {
+            const div = document.createElement(`div`);
+            div.className = `flashcard`;
+            div.onclick = () => div.classList.toggle(`flipped`);
+            div.innerHTML = `
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">${card.f}</div>
+                    <div class="flashcard-back">${card.b}</div>
+                </div>
+            `;
+            flashcardContainer.appendChild(div);
+        });
+    </script>
+    <script src="https://cdn.kuse.ai/sdk.prd.js"></script>
+
+</body></html>
